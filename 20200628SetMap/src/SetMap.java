@@ -57,6 +57,7 @@ public class SetMap {
     }
 
     public static Map<String, String> getMapAB1(Map<String, String> map) {
+       // Map<String, String> newMap = new HashMap<>();
         if (map.containsKey("a") && map.containsKey("b")) {
             map.put("ab", map.get("a") + map.get("b"));
         } else {
