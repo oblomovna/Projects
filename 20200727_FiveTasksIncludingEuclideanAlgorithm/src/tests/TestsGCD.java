@@ -10,7 +10,7 @@ public class TestsGCD {
         Main m = new Main();
         int a = 661;
         int b = 113;
-        int n = m.gcd_1(a, b);
+        int n = m.gcd1(a, b);
         Assert.assertTrue(true);
     }
     @Test
@@ -18,7 +18,7 @@ public class TestsGCD {
         Main m = new Main();
         int a = 662;
         int b = 113;
-        int n = m.gcd_1(a, b);
+        int n = m.gcd1(a, b);
         Assert.assertFalse(false);
     }
     @Test

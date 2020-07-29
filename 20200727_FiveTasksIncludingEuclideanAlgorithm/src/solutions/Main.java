@@ -26,7 +26,7 @@ public class Main {
         System.out.println(isMultiple2(list2, 3));
 
         System.out.println("gcd2");
-        System.out.println(gcd_1(64, 48));
+        System.out.println(gcd1(64, 48));
 
         System.out.println("gcd3");
         System.out.println(gcd_2(64, 48));
@@ -84,7 +84,7 @@ public class Main {
         return false;
     }
 
-    public static int gcd_1(int a, int b) {
+    public static int gcd1(int a, int b) {
         int t;
         while (b != 0) {
             t = b;
