@@ -41,4 +41,19 @@ class IsMultipliedTest {
         List<Integer> toTest = Arrays.asList();
         assertFalse(isMultiplied.isMultiplied(toTest, 8));
     }
+    @Test
+    public void testIsMultiplied_64_false() {
+        List<Integer> toTest = Arrays.asList(1, 2, 4, 8, 12, 15, 20);
+        assertFalse(isMultiplied.isMultiplied(toTest, 64));
+    }
+    @Test
+    public void testIsMultiplied_64andAnotherList_false() {
+        List<Integer> toTest = Arrays.asList(1, 2, 4, 8, 9, 12, 15, 20);
+        assertFalse(isMultiplied.isMultiplied(toTest, 81));
+    }
+    @Test
+    public void testIsMultiplied_49andAnotherList_false() {
+        List<Integer> toTest = Arrays.asList(4,5,7,8,10);
+        assertFalse(isMultiplied.isMultiplied(toTest, 49));
+    }
 }

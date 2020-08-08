@@ -8,8 +8,8 @@ public class TestsGCD {
     @Test
     public void testGcd_1() {
         Main m = new Main();
-        int a = 661;
-        int b = 113;
+        int a = 64;
+        int b = 48;
         int n = m.gcd1(a, b);
         Assert.assertTrue(true);
     }
