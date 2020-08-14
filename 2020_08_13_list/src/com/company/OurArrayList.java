@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -12,11 +13,12 @@ import java.util.Iterator;
  */
 
 public class OurArrayList<T> implements OurList<T>{
+    static final int INITIAL_CAPACITY = 16;
     Object[] source;
     int size;
 
     public OurArrayList() {
-        this.source = new Object[16];
+        this.source = new Object[INITIAL_CAPACITY];
         this.size = 0;
     }
 
@@ -24,34 +26,55 @@ public class OurArrayList<T> implements OurList<T>{
     @Override
     public void add(T elt) {
         if (size == source.length){
-            Object[] newSource = new Object[source.length*2];
-            for (int i = 0; i < source.length; i++) {
-                newSource[i] = source[i];
+            increaseSource();
             }
-            source = newSource;
-        }
-        source[size++] = elt;
+        source[size] = elt;
+        size++;
+    }
+    private void increaseSource(){
+        Object[] newSource = new Object[source.length*2];
+        source = Arrays.copyOf(source,source.length*2);
+      // System.arraycopy(source,0,newSource,0,source.length);
+       source = newSource;
     }
 
     @Override
     public T remove(int index) {
-        return null;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+        Object eltToReturn
+                = (T) source[index];
+        System.arraycopy(source, index + 1, source, index, size - index - 1);
+        size--;
+        return (T) eltToReturn;
     }
 
     @Override
     public boolean remove(T elt) {
+        for (int i = 0; i < size; i++) {
+            if (source[i].equals(elt)) {
+                System.arraycopy(source, i + 1, source, i, size - (i - 1));
+                size--;
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public T get(int index) {
-        if (index > size)
+        if (index >= size && index<0)
             throw new IndexOutOfBoundsException();
         return (T) source[index];
     }
 
     @Override
     public boolean contains(T elt) {
+        for (int i = 0; i < size; i++) {
+            if (source[i] == elt)
+                return true;
+        }
         return false;
     }
 
@@ -62,8 +85,11 @@ public class OurArrayList<T> implements OurList<T>{
 
     @Override
     public void set(int index, T elt) {
-
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        } else source[index] = elt;
     }
+
 
     @Override
     public void sort() {
