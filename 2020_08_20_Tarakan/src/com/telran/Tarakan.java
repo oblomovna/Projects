@@ -10,45 +10,33 @@ public class Tarakan implements Runnable {
     private static final int LONGEST_STEP = 100;
 
     String name;
-    int stepNum;
+    int stepsNum;
     List<Score> scores;
-    double random;
-    //Random random = new Random();
+    Random random = new Random();
 
-    public Tarakan(String name, int stepNum, List<Score> scores) {
+    public Tarakan(int stepsNum, String name, List<Score> scores) {
+        this.stepsNum = stepsNum;
         this.name = name;
-        this.stepNum = stepNum;
         this.scores = scores;
-        this.random = Math.random() * (LONGEST_STEP - FASTER_STEP) + FASTER_STEP;
     }
-
-
-    public static int getFasterStep() {
-        return FASTER_STEP;
-    }
-
-    public static int getLongestStep() {
-        return LONGEST_STEP;
-    }
-
 
     @Override
     public void run() {
-        double result = 0;
-        for (int i = 0; i < stepNum; i++) {
-            result += random;
+        long start = System.currentTimeMillis();
+
+        for (int i = 0; i < stepsNum; i++) {
+            int stepLength = random.nextInt(LONGEST_STEP - FASTER_STEP) + FASTER_STEP;
+            try {
+                Thread.sleep(stepLength);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+        long finish = System.currentTimeMillis();
+
+        synchronized (scores) {
+            scores.add(new Score(name, (int) (finish - start)));
         }
-
-        scores.add(new Score(name, result));
-        System.out.println(name);
-        System.out.println(result);
-
-
     }
 }
-
